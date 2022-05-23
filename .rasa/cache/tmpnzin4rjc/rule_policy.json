@@ -1,0 +1,27 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}]": "weather_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}, {\"active_loop\": {\"name\": \"utter_weather_slots\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]": "action_listen",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_form\"}}]": "utter_weather_slots",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"utter_weather_slots\"}}]": "weather_action",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"utter_weather_slots\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_action\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [
+      "weather_form",
+      "utter_weather_slots"
+    ],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"utter_weather_slots\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "predicting default action with intent restart",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}, {\"active_loop\": {\"name\": \"utter_weather_slots\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]",
+      "predicting default action with intent back",
+      "handling active loops and forms - weather_form - action_listen",
+      "handling active loops and forms - weather_form"
+    ]
+  }
+}

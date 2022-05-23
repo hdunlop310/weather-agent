@@ -1,0 +1,75 @@
+version: '3.1'
+entities:
+- user_location
+- city
+- date
+- request
+- activity
+slots:
+  user_location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: user_location
+  city:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: city
+  date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: date
+  request:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: request
+  activity:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: activity
+forms:
+  weather_form:
+    required_slots:
+    - city
+  details_form:
+    required_slots:
+    - request
+  warning_form:
+    required_slots:
+      - city
+  activity_form:
+    required_slots:
+      - activity
+responses:
+  utter_ask_city:
+  - text: Which city?
+  - text: In which city?
+  - text: Which city would you like me to check?
+  - text: For where?
+actions:
+- request_action
+- utter_detail_slots
+- utter_weather_slots
+- weather_action
+- warning_action
+- activity_action
+intents:
+- get_details
+- get_weather
+- get_activity
+- greet
+- request_details_form
+- request_weather_form
+- get_warnings
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

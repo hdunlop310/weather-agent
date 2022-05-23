@@ -1,0 +1,4 @@
+*.txt
+models/
+.tensorboard/
+.rasa/

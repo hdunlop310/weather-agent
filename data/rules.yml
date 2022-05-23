@@ -1,0 +1,70 @@
+version: "3.1"
+
+rules:
+
+- rule: Activate weather form
+  steps:
+  - intent: get_weather
+  - action: weather_form
+  - active_loop: weather_action
+
+- rule: Submit weather form
+  condition:
+  - active_loop: weather_form
+  steps:
+  - action: weather_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: weather_action
+
+
+- rule: Activate activity form
+  steps:
+  - intent: get_activity
+  - action: activity_form
+  - active_loop: activity_action
+
+- rule: Submit activity form
+  condition:
+  - active_loop: activity_form
+  steps:
+  - action: activity_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: activity_action
+
+- rule: Activate warning form
+  steps:
+  - intent: get_warnings
+  - action: warning_form
+  - active_loop: warning_action
+
+- rule: Submit warning form
+  condition:
+  - active_loop: warning_form
+  steps:
+  - action: warning_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: warning_action
+
+- rule: Activate details form
+  steps:
+  - intent: get_details
+  - action: details_form
+  - active_loop: utter_detail_slots
+
+- rule: Submit details form
+  condition:
+  - active_loop: details_form
+  steps:
+  - action: get_details
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: request_action
+
+

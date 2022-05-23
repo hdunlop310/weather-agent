@@ -1,0 +1,12 @@
+{
+  "rule_only_slots": [],
+  "rule_only_loops": [
+    "activity_action",
+    "utter_detail_slots",
+    "weather_form",
+    "weather_action",
+    "warning_form",
+    "activity_form",
+    "warning_action"
+  ]
+}

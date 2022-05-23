@@ -1,0 +1,150 @@
+version: "3.1"
+nlu:
+- intent: get_weather
+  examples: |
+    - What is the weather like in [Glasgow](city)?
+    - What is the weather like in [Glasgow](city) [today](date)?
+    - What is the weather like in [Glasgow](city) on the [3rd of October](date)?
+    - Whats the weather like in [London](city)?
+    - Whats the forecast in [Edinburgh](city)?
+    - What's the weather like in [Ausin](city)?
+    - Give me the weather forecast for [New York](city)?
+    - How's the weather in [Madrid](city)?
+    - Weather in [Yountville](city)?
+    - Weather in [Denver](city) [tomorrow](date)?
+    - Whats the forcast for [Saint Petersburg](date) [today](date)?
+    - Tell me the [current](date) forecast for [Berlin](city)
+    - what is the weather like?
+    - whats the forecast?
+    - whats the weather like in [glasgow](city)?
+    - whats the weather?
+    - whats the weather going to be in [rome](city) on the [10th](date)?
+    - what will be the forecast in [Rome](city) on [Monday](date)?
+    - Whats the weather in [glasgow](city)?
+    - what is the weather in [saint petersburg](date)?
+    - what is the weather like in [Kyiv](city)
+    - what is the weather like in [Berlin](city)?
+    - what will the weather be like in [glasgow](city) [tomorrow](date)?
+    - what's the weather [today](date)?
+    - whats the weather going to be like the [day after tomorrow](date)?
+    - What is the weather supposed to be like on the [10th](date)?
+    - How about [Novato](city) on the [12th of March 2019](date)?
+    - I want to check the weather in [El Sobrante](city) on the [6th of March 2019](date).
+    - How about the weather in [Guerneville](city) on the [1st of March 2019](date)?
+    - What does the weather on [March 14th](date) look like?
+    - whats the weather in [edinburgh](city) on [14th march](city) looking like?
+    - What's the weather like on [Thursday next week](date)?
+    - What's the weather like on [next Thursday](date)?
+    - I need the weather forecast for [the 7th](date).
+    - i want to check the weather in [calistoga](city) on the [3rd](date) of this month.
+    - Do you know the weather on [March 9th](date)?
+    - Please check the weather for me in [sonoma](city) on [9th](date) of this month
+    - I want to check the weather for [March 7th](date).
+    - Please check the weather on [March 7th](date).
+    - What'll the weather be like on [March 9th](date)?
+    - What will the weather be like on [4th](date) of this month in [San Fran](city)?
+    - Can you find me the weather in [Novato](city) for [March 13th](date)?
+    - I will go to [Millbrae](city) soon. Can you check the weather in there on [March 6th](date)?
+    - What will the weather be like in [Pleasant Hill](city) on the [9th of March](date)?
+    - Can you help me check the weather for [March 1st](date) for [Campbell](city)?
+    - Can you check the weather in [Paris](city), France for me?
+    - Check for me please the weather in [Mountain View](city).
+    - I would like to check the weather in [Hercules](city).
+    - Could you check the weather in [Alamo](city)?
+    - How about [Novato](city) on the [12th of March 2022](date)
+    - What about [March 2nd 2022](date)?
+    - I was talking about [Vancouver](city), BC
+    - I want to check [Liverpool](city)
+    - I want to check the weather for [April 1st](date)
+    - Give me the weather for the [10th](date)
+    - Please check [Paris](city)
+    - Whats the weather like in [Edinburgh](city)?
+    - OK, how about [Glasgow](city)?
+    - Great. Can you give me the forecast in [Madrid](city) for [next Thursday](date)?
+    - Please tell me what the weather is going to be like on [Wednesday next week](date)?
+    - [Tokyo](city), please
+    - Please tell me what the weather is going to be like in [Tokyo](city) [next Wednesday](date)
+    - I'll be spending the day in [Cupertino](city). Can you check what the weather is like there?
+    - What is the weather in [East Palo Alto](city)?
+    - I'd like to know the [Newark](city) forecast on [the 10th](date) please.
+    - whats the forecast
+    - [Newark](city), please
+    - I wonder if it's gonna rain. Can you check the weather?
+    - Hey, what's the weather like in [Nairobi](city)?
+    - can you give me the [glasgow](city) forecast for [the week](date)?
+    - can you give me the [weekly](date) forecast?
+    -
+- intent: greet
+  examples: |
+    - hi
+    - hi there
+    - yo
+    - eyo
+    - wassup
+- intent: get_details
+  examples: |
+    - how [humid](request) would it be
+    - Will it be [windy](request)? How [humid](request)?
+    - What will the [humidity](request) be? Will it be [windy](request)?
+    - will it be [windy](request)?
+    - is it [windy](request)?
+    - is it [humid](request)?
+    - Will it be [windy](request)?
+    - Do you have any information on the [humidity](request) or [wind](request) speed?
+    - is it going to be [windy](request)?
+    - what is the [wind direction](request)?
+    - can you tell me the [direction](request) of the wind?
+    - what is the [pressure](request) like?
+    - Hows the [pressure](request)?
+    - how [cloudy](request) is it?
+    - it is [cloudy](request)?
+    - are there are lot of [clouds](request)?
+
+- intent: get_warnings
+  examples: |
+    - Are there any weather warnings in [Glasgow](city)?
+    - What are the weather warnings in [Aberdeen](city)?
+    - Any weather warnings in [London](city)?
+
+
+- intent: get_activity
+  examples: |
+    - Are there any good [parks](activity) in the area?
+    - Can you tell me some good [parks](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [parks](activity) in [London](city), please
+    - Can you recommend me a good [park](activity) to go to?
+
+    - Are there any good [museums](activity) in the area?
+    - Can you tell me some good [museums](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [museums](activity) in [London](city), please
+    - Can you recommend me a good [museum](activity) to go to?
+
+    - Are there any good [cinemas](activity) in the area?
+    - Can you tell me some good [cinemas](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [cinemas](activity) in [London](city), please
+    - Can you recommend me a good [cinema](activity) to go to?
+
+    - Are there any good [zoo](activity) in the area?
+    - Can you tell me some good [zoo](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [zoo](activity) in [London](city), please
+    - Can you recommend me a good [zoos](activity) to go to?
+
+    - Are there any good [gallerys](activity) in the area?
+    - Can you tell me some good [gallerys](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [gallerys](activity) in [London](city), please
+    - Can you recommend me a good [gallery](activity) to go to?
+
+    - Are there any good [tourist attractions](activity) in the area?
+    - Can you tell me some good [tourist attractions](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [tourist attractions](activity) in [London](city), please
+    - Can you recommend me a good [tourist attraction](activity) to go to?
+
+    - Are there any good [restaurants](activity) in the area?
+    - Can you tell me some good [restaurants](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [restaurants](activity) in [London](city), please
+    - Can you recommend me a good [restaurant](activity) to go to?
+
+    - Are there any good [pubs](activity) in the area?
+    - Can you tell me some good [pubs](activity) in [Glasgow](city)?
+    - Point me in the direction of some good [pubs](activity) in [London](city), please
+    - Can you recommend me a good [pub](activity) to go to?

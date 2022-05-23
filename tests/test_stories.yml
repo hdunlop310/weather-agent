@@ -1,0 +1,324 @@
+stories:
+- story: basic weather
+  steps:
+  - user: |
+      what is the weather in [glasgow](city)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: glasgow
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+- story: basic weather 2
+  steps:
+  - user: |
+      what is the weather forcast for [glasgow](city) [tomorrow](date)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: glasgow
+    - date: tomorrow
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+
+- story: dev-3_00076
+  steps:
+  - user: |
+      I want to check the weather in [El Sobrante](city) on the [6th of March 2022](date).
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: El Sobrante
+    - date: 6th of March 2022
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      Okay, how about the weather in [Guerneville](city) on the [1st of March 2022](date)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Guerneville
+    - date: 1st of March 2022
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      How [humid](request) is it supposed to be?
+    intent: get_details
+  - action: details_form
+  - slot_was_set:
+      - requested_slot: request
+  - slot_was_set:
+      - request: humid
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+- story: dev-3_00080
+  steps:
+  - user: |
+      I wonder if it's gonna rain. Can you check the weather?
+    intent: get_weather
+  - action: weather_form
+  - active_loop: weather_form
+  - user: |
+      In [San Pablo](city).
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: San Pablo
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+- story: dev-3_00085
+  steps:
+  - user: |
+      Could you check the weather in [Alamo](city)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Alamo
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      How about [Novato](city) on the [12th of March 2022](date)
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Novato
+    - date: 12th of March 2022
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      What about [March 2nd 2022](date)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+      - requested_slot: city
+  - slot_was_set:
+      - city: Novato
+      - date: March 2nd 2022
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      Will it be [windy](request)?
+    intent: get_details
+  - action: details_form
+  - slot_was_set:
+      - requested_slot: request
+  - slot_was_set:
+      - request: windy
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+
+- story: dev-3_00036
+  steps:
+  - user: |
+      I would like to check the weather for the [day after tomorrow] in [Paris, France](city).
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Paris, France
+    - date: day after tomorrow
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      How [windy](request) will it be?
+    intent: get_details
+  - action: details_form
+  - slot_was_set:
+      - requested_slot: request
+  - slot_was_set:
+      - request: windy
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+
+
+- story: dev-3_00043
+  steps:
+  - user: |
+      What is the weather like on the [13th of March](date)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - date: 13th of March
+  - active_loop: weather_form
+  - user: |
+      The weather in [New York](city).
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: New York
+    - date: 13th of March
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+
+- story: dev-3_00116
+  steps:
+  - user: |
+      I'd like to know the [Newark](city) forecast on the [10th](date) please.
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Newark
+    - date: the 10th
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+- story: dev-3_00121
+  steps:
+  - user: |
+      What is the weather in [East Palo Alto](city)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: East Palo Alto
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+- story: dev-3_00001
+  steps:
+  - user: |
+      I'll be spending the day in [Cupertino](city). Can you check what the weather is like there?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Cupertino
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      How [windy](request) will it be?
+    intent: get_details
+  - action: details_form
+  - slot_was_set:
+      - requested_slot: request
+  - slot_was_set:
+      - request: windy
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+
+- story: dev-3_00004
+  steps:
+  - user: |
+      Hey, what's the weather like in [Nairobi](city)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Nairobi
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+
+- story: dev-3_00007
+  steps:
+  - user: |
+      What is the weather supposed to be like on the [10th](date)?
+    intent: get_weather
+  - action: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - date: the 10th
+  - active_loop: weather_form
+  - user: |
+      I was talking about [Vancouver, BC](city)
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Vancouver, BC
+    - date: the 10th
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+  - user: |
+      Do you have any information on the [humidity](request) or [wind](request) speed?
+    intent: get_details
+  - action: details_form
+  - slot_was_set:
+      - requested_slot: request
+  - slot_was_set:
+      - request: humidity
+      - request: wind
+  - slot_was_set:
+      - requested_slot: null
+  - active_loop: null
+  - action: request_action

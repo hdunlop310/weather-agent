@@ -1,0 +1,304 @@
+version: "3.1"
+
+stories:
+
+- story: example story
+  steps:
+  - intent: get_weather
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Cairo
+    - date: today
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: example story 2
+  steps:
+  - intent: get_weather
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Cairo
+    - date: today
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: example story details
+  steps:
+  - intent: get_details
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: request
+  - slot_was_set:
+    - request: wind
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+
+- story: example story weather and details
+  steps:
+  - intent: get_weather
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Cairo
+    - date: today
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_details
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: request
+  - slot_was_set:
+    - request: wind
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - city: glasgow
+  - slot_was_set:
+    - city: glasgow
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+
+  - action: weather_action
+  - intent: get_details
+    entities:
+    - request: windy
+  - slot_was_set:
+    - request: windy
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - city: Alamo
+  - slot_was_set:
+    - city: Alamo
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_weather
+    entities:
+    - city: Novato
+    - date: 12th of March 2022
+  - slot_was_set:
+    - city: Novato
+  - slot_was_set:
+    - date: 12th of March 2022
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_weather
+    entities:
+    - date: March 2nd 2022
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_details
+    entities:
+    - request: windy
+  - slot_was_set:
+    - request: windy
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - date: 10th
+  - slot_was_set:
+    - date: 10th
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Vancouver
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_details
+    entities:
+    - request: humidity
+    - request: wind
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: request
+  - action: request_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - date: April 1st
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Liverpool
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_details
+    entities:
+    - request: windy
+  - slot_was_set:
+    - request: windy
+  - action: details_form
+  - active_loop: details_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: request_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - date: 10th
+  - slot_was_set:
+    - date: 10th
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Paris
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - city: Edinburgh
+  - slot_was_set:
+    - city: Edinburgh
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_weather
+    entities:
+    - city: Glasgow
+  - slot_was_set:
+    - city: Glasgow
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+  - intent: get_weather
+    entities:
+    - city: Madrid
+    - date: next Thursday
+  - slot_was_set:
+    - city: Madrid
+  - slot_was_set:
+    - date: next Thursday
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: interactive_story_2
+  steps:
+  - intent: get_weather
+    entities:
+    - city: Cupertino
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Cupertino
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: city
+  - slot_was_set:
+    - city: Newark
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_weather
+    entities:
+    - city: Nairobi
+  - slot_was_set:
+    - city: Nairobi
+  - action: weather_form
+  - active_loop: weather_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: weather_action

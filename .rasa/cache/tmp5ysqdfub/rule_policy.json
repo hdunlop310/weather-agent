@@ -1,0 +1,39 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_details\"}}]": "details_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_details\"}}, {\"active_loop\": {\"name\": \"utter_detail_slots\"}, \"prev_action\": {\"action_name\": \"details_form\"}, \"user\": {\"intent\": \"get_details\"}}]": "action_listen",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"get_details\"}}]": "request_action",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"get_details\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"request_action\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}]": "weather_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}, {\"active_loop\": {\"name\": \"weather_action\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]": "action_listen",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_form\"}}]": "weather_action",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"weather_action\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [
+      "weather_action",
+      "weather_form",
+      "utter_detail_slots"
+    ],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"utter_detail_slots\"}, \"prev_action\": {\"action_name\": \"details_form\"}, \"user\": {\"intent\": \"get_details\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"weather_action\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"details_form\"}, \"prev_action\": {\"action_name\": \"details_form\"}, \"slots\": {\"city\": [1.0], \"date\": [1.0], \"request\": [1.0]}, \"user\": {\"entities\": [\"request\"], \"intent\": \"get_details\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"details_form\"}}, {\"active_loop\": {\"name\": \"details_form\"}, \"prev_action\": {\"action_name\": \"request_action\"}, \"slots\": {\"city\": [1.0], \"date\": [1.0], \"request\": [1.0]}, \"user\": {\"entities\": [\"request\"], \"intent\": \"get_details\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_weather\"}}, {\"active_loop\": {\"name\": \"weather_action\"}, \"prev_action\": {\"action_name\": \"weather_form\"}, \"user\": {\"intent\": \"get_weather\"}}]",
+      "handling active loops and forms - details_form",
+      "handling active loops and forms - weather_form - action_listen",
+      "handling active loops and forms - details_form - action_listen",
+      "handling active loops and forms - weather_form",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"get_details\"}}]",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"get_details\"}}, {\"active_loop\": {\"name\": \"utter_detail_slots\"}, \"prev_action\": {\"action_name\": \"details_form\"}, \"user\": {\"intent\": \"get_details\"}}]",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"get_details\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"request_action\"}}]",
+      "predicting default action with intent restart",
+      "predicting default action with intent back"
+    ]
+  }
+}
