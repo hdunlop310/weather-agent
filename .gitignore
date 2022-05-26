@@ -2,3 +2,4 @@
 models/
 .tensorboard/
 .rasa/
+*.json

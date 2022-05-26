@@ -73,7 +73,7 @@ nlu:
     - Hey, what's the weather like in [Nairobi](city)?
     - can you give me the [glasgow](city) forecast for [the week](date)?
     - can you give me the [weekly](date) forecast?
-    -
+    - 
 - intent: greet
   examples: |
     - hi
@@ -99,52 +99,52 @@ nlu:
     - how [cloudy](request) is it?
     - it is [cloudy](request)?
     - are there are lot of [clouds](request)?
-
 - intent: get_warnings
   examples: |
     - Are there any weather warnings in [Glasgow](city)?
     - What are the weather warnings in [Aberdeen](city)?
     - Any weather warnings in [London](city)?
-
-
 - intent: get_activity
   examples: |
     - Are there any good [parks](activity) in the area?
     - Can you tell me some good [parks](activity) in [Glasgow](city)?
     - Point me in the direction of some good [parks](activity) in [London](city), please
     - Can you recommend me a good [park](activity) to go to?
-
     - Are there any good [museums](activity) in the area?
     - Can you tell me some good [museums](activity) in [Glasgow](city)?
     - Point me in the direction of some good [museums](activity) in [London](city), please
     - Can you recommend me a good [museum](activity) to go to?
-
     - Are there any good [cinemas](activity) in the area?
     - Can you tell me some good [cinemas](activity) in [Glasgow](city)?
     - Point me in the direction of some good [cinemas](activity) in [London](city), please
     - Can you recommend me a good [cinema](activity) to go to?
-
     - Are there any good [zoo](activity) in the area?
     - Can you tell me some good [zoo](activity) in [Glasgow](city)?
     - Point me in the direction of some good [zoo](activity) in [London](city), please
     - Can you recommend me a good [zoos](activity) to go to?
-
     - Are there any good [gallerys](activity) in the area?
     - Can you tell me some good [gallerys](activity) in [Glasgow](city)?
     - Point me in the direction of some good [gallerys](activity) in [London](city), please
     - Can you recommend me a good [gallery](activity) to go to?
-
     - Are there any good [tourist attractions](activity) in the area?
     - Can you tell me some good [tourist attractions](activity) in [Glasgow](city)?
     - Point me in the direction of some good [tourist attractions](activity) in [London](city), please
     - Can you recommend me a good [tourist attraction](activity) to go to?
-
     - Are there any good [restaurants](activity) in the area?
     - Can you tell me some good [restaurants](activity) in [Glasgow](city)?
     - Point me in the direction of some good [restaurants](activity) in [London](city), please
     - Can you recommend me a good [restaurant](activity) to go to?
-
     - Are there any good [pubs](activity) in the area?
     - Can you tell me some good [pubs](activity) in [Glasgow](city)?
     - Point me in the direction of some good [pubs](activity) in [London](city), please
     - Can you recommend me a good [pub](activity) to go to?
+- intent: get_city_information
+  examples: |
+    - Can you tell me about [Glasgow](city)?
+    - What is the [population](city_info) of [London](city)?
+    - Can you tell me the [population](city_info) and the [language](city_info) spoken in [Cairo](city)?
+    - What do [language](city_info) is spoken in [Rome](city)?
+    - Tell me about [Dublin](city)
+    - can you tell me about [Rome](city)?
+    - Can you tell me about [Montreal](city)?
+    - Can you tell me about [Rome](city)?

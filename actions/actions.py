@@ -14,11 +14,12 @@ import math
 from datetime import timedelta
 import datetime
 from dateutil.parser import parse
-import json
 import random
 import socket
-from ip2geotools.databases.noncommercial import DbIpCity
-from geopy.geocoders import Nominatim
+import json
+from countryinfo import CountryInfo
+from iso639 import languages
+from numerize import numerize
 
 humidity = []
 wind = []
@@ -63,19 +64,66 @@ def get_weather_warnings(lat, lon, key):
     return info
 
 
-def get_api_key_geoapi():
-    with open("api_key_geoapi.txt", 'r') as f:
-        return f.read().strip()
+def get_city_information(city):
+    keys = get_api_keys()
+    ninja_key = keys["apininja"]
+    response = requests.get(f'https://api.api-ninjas.com/v1/city?name={city}', headers={'X-Api-Key': ninja_key})
+    print(response.json())
+    return response.json()[0]["population"], response.json()[0]["is_capital"],  response.json()[0]["country"]
+
+def get_country_information(country):
+    keys = get_api_keys()
+    ninja_key = keys["apininja"]
+    response = requests.get(f'https://api.api-ninjas.com/v1/country?name={country}', headers={'X-Api-Key': ninja_key})
+    flag_url = f'https://countryflagsapi.com/png/{country}'
+    info = CountryInfo(country)
+    lang_names = []
+    for language in info.languages():
+         lang_names.append(languages.get(alpha2=language).name)
+    return response.json()[0]["currency"]["name"], response.json()[0]["name"], lang_names, flag_url
+
+def call_city_api(city):
+    keys = get_api_keys()
+    ninja_key = keys["apininja"]
+    response = requests.get(f'https://api.api-ninjas.com/v1/city?name={city}', headers={'X-Api-Key': ninja_key})
+    return response.json()
+
+def get_country_languages(country):
+    info = CountryInfo(country)
+    lang_names = []
+    for language in info.languages():
+         lang_names.append(languages.get(alpha2=language).name)
+    return lang_names
+
+def get_city_population(city):
+    data = call_city_api(city)
+    return data[0]["population"]
+
+def construct_response(is_capital, city, population, country_name, currency, languages, flag_url):
+
+    population = numerize.numerize(population)
+
+    if is_capital:
+        capital_message = "is the capital city of"
+    else:
+        capital_message = "is a city in"
+    lan_message = ""
+    if len(languages) == 1:
+        lan_message += f"the language spoken there is {languages[0]}"
+    else:
+        lan_message += f"the languages spoken there are "
+        for language in languages:
+            lan_message += language
+            if languages.index(language) != len(languages)-1:
+                lan_message += " and "
+
+    return f"{city.capitalize()} {capital_message} {country_name}. It has a population of {population} and {lan_message}. {city.capitalize()}'s currency is the {currency} and the country's flag can be viewed here: {flag_url}"
 
 
-def get_api_key_weatherbit():
-    with open("api_key_weatherbit.txt", 'r') as f:
-        return f.read().strip()
-
-
-def get_api_key_openweather():
-    with open("api_key.txt", 'r') as f:
-        return f.read().strip()
+def get_api_keys():
+    with open("api_keys.json", "r") as f:
+        keys = json.load(f)
+    return keys
 
 
 def get_lat_lon(city, key):
@@ -83,6 +131,7 @@ def get_lat_lon(city, key):
         f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={key}")).json()
     lat = response[0]['lat']
     lon = response[0]['lon']
+    print(lat,lon)
     return lat, lon
 
 
@@ -243,21 +292,22 @@ class GetWeather(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        key = get_api_key_openweather()
+        keys = get_api_keys()
+        open_weather_key = keys["openweather"]
         city = tracker.get_slot('city')
         date = tracker.get_slot('date')
 
         date = date_parser(date)
         if check_how_long_ago_date_was_from_current_date(date) > 0:
             date = format_date(date)
-            lat, lon = get_lat_lon(city, key)
-            general_description, average_temp, rain_chance, feels_like = get_weather_for_specific_time_historical(lat, lon, key,
+            lat, lon = get_lat_lon(city, open_weather_key)
+            general_description, average_temp, rain_chance, feels_like = get_weather_for_specific_time_historical(lat, lon, open_weather_key,
                                                                                                       date)
         elif check_how_long_ago_date_was_from_current_date(date) <= 0:
             days = check_how_long_ago_date_was_from_current_date(date)
             date = format_date(date)
-            lat, lon = get_lat_lon(city, key)
-            general_description, average_temp, rain_chance, feels_like = get_weather_for_specific_time_future(lat, lon, key, days)
+            lat, lon = get_lat_lon(city, open_weather_key)
+            general_description, average_temp, rain_chance, feels_like = get_weather_for_specific_time_future(lat, lon, open_weather_key, days)
 
         message = f"The weather in {city.title()} on {date} is forecasted to be {general_description}. There is {rain_chance}% chance of rain and the average temperature is forecasted to be {math.trunc(average_temp)} degrees Kelvin. The 'feels like' temperature is {feels_like}. Is there anything else I can help you with?"
 
@@ -300,8 +350,11 @@ class GetWarnings(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        open_weather_key = get_api_key_openweather()
-        weather_bit_key = get_api_key_weatherbit()
+
+        keys = get_api_keys()
+        open_weather_key = keys["openweather"]
+        weather_bit_key  = keys["weatherbit"]
+
         city = tracker.get_slot('city')
         city_default = get_user_city()
         message = ""
@@ -331,8 +384,9 @@ class GetActivity(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        open_weather_key = get_api_key_openweather()
-        geoapi_key = get_api_key_geoapi()
+        keys = get_api_keys()
+        open_weather_key = keys["openweather"]
+        geoapi_key = keys["geoapi"]
         city = tracker.get_slot('city')
         activity = tracker.get_slot('activity')
         city_default = get_user_city()
@@ -370,3 +424,40 @@ class GetActivity(Action):
 
         dispatcher.utter_message(message)
         return []
+
+
+class GetCityInformation(Action):
+
+    def name(self) -> Text:
+        return "city_info_action"
+
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        city = tracker.get_slot('city')
+        info = tracker.get_slot('city_info')
+        valid_info = ["population", "language"]
+        if info is None:
+            population, is_capital, country = get_city_information(city)
+            currency, country_name, languages, flag_url = get_country_information(country)
+            dispatcher.utter_message(construct_response(is_capital, city, population, country_name, currency, languages, flag_url))
+        else:
+            message = ""
+            for i in info:
+                if i in valid_info:
+                    info = specific_information(i, city)
+                    message += f"{city.capitalize()}'s {i} is {info}. "
+            dispatcher.utter_message(message)
+
+        return []
+
+
+def specific_information(info, city):
+    if info == "population":
+        population = numerize.numerize(get_city_population(city))
+        return population
+    elif info == "language":
+        info = get_city_information(city)
+        languages = get_country_languages(info[2])
+        return ", ".join(languages)

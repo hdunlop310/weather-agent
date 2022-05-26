@@ -1,10 +1,11 @@
 version: '3.1'
 entities:
-- user_location
 - city
+- user_location
 - date
 - request
 - activity
+- city_info
 slots:
   user_location:
     type: text
@@ -34,8 +35,14 @@ slots:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: activity
+    - type: from_entity
+      entity: activity
+  city_info:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: city_info
 forms:
   weather_form:
     required_slots:
@@ -45,10 +52,13 @@ forms:
     - request
   warning_form:
     required_slots:
-      - city
+    - city
   activity_form:
     required_slots:
-      - activity
+    - activity
+  city_info_form:
+    required_slots:
+    - city
 responses:
   utter_ask_city:
   - text: Which city?
@@ -56,20 +66,22 @@ responses:
   - text: Which city would you like me to check?
   - text: For where?
 actions:
+- activity_action
+- city_info_action
 - request_action
 - utter_detail_slots
 - utter_weather_slots
-- weather_action
 - warning_action
-- activity_action
+- weather_action
 intents:
-- get_details
-- get_weather
 - get_activity
+- get_city_information
+- get_details
+- get_warnings
+- get_weather
 - greet
 - request_details_form
 - request_weather_form
-- get_warnings
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

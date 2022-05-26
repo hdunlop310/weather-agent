@@ -302,3 +302,41 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: weather_action
+
+- story: interactive_story_1
+  steps:
+  - intent: get_city_information
+    entities:
+    - city: Rome
+  - slot_was_set:
+    - city: Rome
+  - action: city_info_form
+  - active_loop: city_info_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: city_info_action
+  - intent: get_city_information
+    entities:
+    - city: Montreal
+  - action: city_info_form
+  - active_loop: city_info_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: city_info_action
+  - intent: greet
+
+- story: interactive_story_1
+  steps:
+  - intent: get_city_information
+    entities:
+    - city: Rome
+  - slot_was_set:
+    - city: Rome
+  - action: city_info_form
+  - active_loop: city_info_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: city_info_action

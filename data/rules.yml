@@ -68,3 +68,18 @@ rules:
   - action: request_action
 
 
+- rule: Activate city details form
+  steps:
+  - intent: get_city_information
+  - action: city_info_form
+  - active_loop: city_info_action
+
+- rule: Submit city details form
+  condition:
+  - active_loop: city_info_form
+  steps:
+  - action: city_info_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: city_info_action
